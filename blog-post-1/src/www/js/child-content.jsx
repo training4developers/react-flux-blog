@@ -5,7 +5,9 @@
 	var HelloWorld = React.createClass({
 
 		render: function() {
-			return React.createElement("h1", null, "Hello World!");
+			return React.createElement("header", null,
+				React.createElement("h1", null, "Hello World!")
+			);
 		},
 
 	});

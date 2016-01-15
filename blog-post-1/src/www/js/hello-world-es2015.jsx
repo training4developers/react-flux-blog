@@ -2,13 +2,13 @@
 
 	"use strict";
 
-	var HelloWorld = React.createClass({
+	class HelloWorld extends React.Component {
 
-		render: function() {
+		render() {
 			return React.createElement("h1", null, "Hello World!");
-		},
+		}
 
-	});
+	}
 
 	var mainElement = document.querySelector("main");
 
