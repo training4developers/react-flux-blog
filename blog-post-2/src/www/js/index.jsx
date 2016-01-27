@@ -4,9 +4,19 @@
 
 	let demos = [
 		{
-			name: "React.js Hello World Demo",
-			description: "A simple Hello World demonstration of React.js.",
-			url: "hello-world.html"
+			name: "React.js Property Update Demo",
+			description: "Demonstrates how React updates the DOM in reaction to re-rendering with new property values.",
+			url: "prop-updates.html"
+		},
+		{
+			name: "React.js Class Property Demo",
+			description: "A simple class property demonstration with React.js.",
+			url: "prop-class-name.html"
+		},
+		{
+			name: "React.js State Update Demo",
+			description: "Demonstrates how React updates the DOM in reaction to state changes.",
+			url: "state-updates.html"
 		},
 	];
 

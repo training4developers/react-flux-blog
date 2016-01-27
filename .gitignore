@@ -29,7 +29,15 @@ node_modules
 # Bower Package Folder
 blog-post-1/src/www/libs
 blog-post-2/src/www/libs
+blog-post-3/src/www/libs
+blog-post-4/src/www/libs
+blog-post-5/src/www/libs
+blog-post-6/src/www/libs
 
 # Distribution Folder
 blog-post-1/dist
 blog-post-2/dist
+blog-post-3/dist
+blog-post-4/dist
+blog-post-5/dist
+blog-post-6/dist
