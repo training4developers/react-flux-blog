@@ -14,5 +14,8 @@
     "babel-plugin-transform-react-jsx": "^6.4.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
   }
 }
