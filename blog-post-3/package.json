@@ -1,0 +1,21 @@
+{
+  "name": "blog-post-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-block-scoping": "^6.4.0",
+    "babel-plugin-transform-es2015-classes": "^6.4.0",
+    "babel-plugin-transform-react-jsx": "^6.4.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

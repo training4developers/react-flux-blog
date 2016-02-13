@@ -1,0 +1,23 @@
+{
+  "name": "blog-post-1",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Eric W. Greene <eric@ericwgreene.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/DevelopIntelligenceBoulder/react-flux-blog",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/www/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.14.6",
+    "bootstrap": "~3.3.6"
+  }
+}
