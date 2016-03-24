@@ -1,7 +1,7 @@
 {
-  "name": "blog-post-3",
+  "name": "blog-post-4",
   "version": "1.0.0",
-  "description": "Exploring React's State Propagation",
+  "description": "Unit Testing React Components",
   "main": "gulpfile.js",
   "author": "Eric W. Greene",
   "license": "MIT",

@@ -3,9 +3,9 @@
   "description": "",
   "main": "gulpfile.js",
   "authors": [
-    "Eric W. Greene <eric@ericwgreene.com>"
+    "Eric W. Greene <eric@training4developers.com>"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/DevelopIntelligenceBoulder/react-flux-blog",
   "moduleType": [],
   "ignore": [

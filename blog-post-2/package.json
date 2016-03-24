@@ -1,13 +1,10 @@
 {
-  "name": "blog-post-1",
+  "name": "blog-post-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Working with Data in React: Properties & State",
   "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "author": "Eric W. Greene",
+  "license": "MIT",
   "devDependencies": {
     "babel-plugin-transform-es2015-block-scoping": "^6.4.0",
     "babel-plugin-transform-es2015-classes": "^6.4.0",
