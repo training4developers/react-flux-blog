@@ -1,6 +1,7 @@
 "use strict";
 
 const
+	webpack = require("webpack-stream"),
 	gulp = require("gulp"),
 	babel = require("gulp-babel");
 
@@ -42,10 +43,25 @@ gulp.task("server", function() {
 
 });
 
-gulp.task("test", ["babel", "copy"], function(done) {
+gulp.task("webpack", ["babel", "copy"], function() {
+
+	return gulp.src("./dist/www/js/index.js")
+		.pipe(webpack({
+			output: {
+        filename: "app-webpack.js"
+    	}
+		}))
+		.on("error", function() {
+			console.dir(arguments);
+		})
+		.pipe(gulp.dest("./dist/www/js"));
+
+});
+
+gulp.task("test-node", ["webpack"], function(done) {
 
 	let
-		commandArgs = ['config=tests/intern'],
+		commandArgs = ['config=tests-node/intern'],
 		env = Object.create(process.env),
 		child = require('child_process')
 			.spawn('./node_modules/.bin/intern-client', commandArgs, {
@@ -63,9 +79,9 @@ gulp.task("test", ["babel", "copy"], function(done) {
 
 });
 
-gulp.task("default", ["babel", "copy"], function () {
+gulp.task("default", ["webpack"], function () {
 
-	gulp.watch("src/www/js/**/*.jsx", ["babel"]);
+	gulp.watch("src/www/js/**/*.jsx", ["webpack"]);
 
 	gulp.watch([
 		"src/*.js",

@@ -12,9 +12,18 @@
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
     "intern": "^3.0.6",
-    "sinon": "^1.17.3"
+    "react-addons-test-utils": "^0.14.7",
+    "sinon": "^1.17.3",
+    "skin-deep": "^0.16.0",
+    "webpack-stream": "^3.1.0"
   },
   "dependencies": {
-    "express": "^4.13.4"
+    "bootstrap": "^3.3.6",
+    "express": "^4.13.4",
+    "immutable": "^3.7.6",
+    "jquery": "^2.2.2",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }
