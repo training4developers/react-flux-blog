@@ -1,20 +1,18 @@
 define([
-  'intern!object',
-  'intern/chai!assert',
-	'intern/dojo/node!skin-deep',
-	'intern/dojo/node!react/dist/react-with-addons',
-	'intern/dojo/node!../../../dist/www/js/input-demo-test'
+	"intern!object",
+	"intern/chai!assert",
+	"intern/dojo/node!skin-deep",
+	"intern/dojo/node!react/dist/react-with-addons",
+	"intern/dojo/node!../../../dist/www/js/input-demo-test"
 ], function (registerSuite, assert, sd, React, InputDemoTest) {
 
 	"use strict";
 
 	// cut down on typing
-	var TestUtils = React.addons.TestUtils;
-
-  registerSuite({
+	registerSuite({
 
 		// name of the unit test suite
-		name: 'React Components',
+		name: "React Components",
 
 		// unit test
 		inputDemoTest: function() {
@@ -44,6 +42,5 @@ define([
 			assert.strictEqual(instance.state.message, newMessage, "after change state");
 			assert.strictEqual(vdom.props.children.props.children[1].props.value, newMessage, "after change dom value");
 		}
-
-  });
+	});
 });

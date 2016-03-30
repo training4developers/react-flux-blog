@@ -1,26 +1,23 @@
 define([
-  'intern!object',
-  'intern/chai!assert',
-	'intern/dojo/node!skin-deep',
-	'intern/dojo/node!react/dist/react-with-addons',
-	'intern/dojo/node!../../../dist/www/js/event-demo-test'
+	"intern!object",
+	"intern/chai!assert",
+	"intern/dojo/node!skin-deep",
+	"intern/dojo/node!react/dist/react-with-addons",
+	"intern/dojo/node!../../../dist/www/js/event-demo-test"
 ], function (registerSuite, assert, sd, React, EventDemoTest) {
 
 	"use strict";
 
-	// cut down on typing
-	var TestUtils = React.addons.TestUtils;
-
-  registerSuite({
+	registerSuite({
 
 		// name of the unit test suite
-		name: 'React Components',
+		name: "React Components",
 
 		// unit test
 		eventDemoTest: function() {
 
 			const
-			 	tree = sd.shallowRender(React.createElement(EventDemoTest)),
+				tree = sd.shallowRender(React.createElement(EventDemoTest)),
 				instance = tree.getMountedInstance();
 
 			let
@@ -36,7 +33,6 @@ define([
 			vdom = tree.getRenderOutput();
 			assert.strictEqual(instance.state.counter, 2, "after click state");
 			assert.strictEqual(vdom.props.children[0].props.children, 2, "after click dom value");
-    }
-
-  });
+		}
+	});
 });

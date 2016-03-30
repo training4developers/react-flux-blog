@@ -20,12 +20,12 @@ let demos = [
 		name: "React.js Immutability Demo",
 		description: "Demonstrates how to use Immutable.js to efficiently propagate state changes from parent React components to their children.",
 		url: "state-immutability.html"
-	},
+	}
 ];
 
 const
-	React = require("react"),
+	React = require("react"), // eslint-disable-line no-unused-vars
 	ReactDOM = require("react-dom"),
-	DemoTable = require("./demo-table");
+	DemoTable = require("./demo-table"); // eslint-disable-line no-unused-vars
 
 ReactDOM.render(<DemoTable demos={demos} />, document.querySelector("main"));

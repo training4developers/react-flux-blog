@@ -3,8 +3,8 @@
 const
 	webpack = require("webpack-stream"),
 	gulp = require("gulp"),
-	babel = require("gulp-babel");
-
+	babel = require("gulp-babel"),
+	jest = require("jest-cli");
 
 gulp.task("babel", function() {
 
@@ -38,7 +38,7 @@ gulp.task("server", function() {
 	};
 
 	require("./dist/server.js")(options).start().then(function() {
-		console.log("web server started on port " + options.port);
+		console.log(`web server started on port ${options.port}`);
 	});
 
 });
@@ -48,8 +48,8 @@ gulp.task("webpack", ["babel", "copy"], function() {
 	return gulp.src("./dist/www/js/index.js")
 		.pipe(webpack({
 			output: {
-        filename: "app-webpack.js"
-    	}
+				filename: "app-webpack.js"
+			}
 		}))
 		.on("error", function() {
 			console.dir(arguments);
@@ -58,24 +58,43 @@ gulp.task("webpack", ["babel", "copy"], function() {
 
 });
 
-gulp.task("test-node", ["webpack"], function(done) {
+gulp.task("test", function(done) {
 
-	let
-		commandArgs = ['config=tests-node/intern'],
-		env = Object.create(process.env),
-		child = require('child_process')
-			.spawn('./node_modules/.bin/intern-client', commandArgs, {
-    		stdio: 'inherit',
-    		env: env
-  		});
+	gulp.src("./__tests__/all.js")
+		.pipe(webpack({
 
-	child.on('close', function (code) {
-    if (code) {
-      done(new Error('Intern exited with code ' + code));
-    } else {
-      done();
-    }
-  });
+			output: {
+				filename: "specs.js",
+				publicPath: "/__tests__/"
+			},
+
+			module: {
+				loaders: [{
+					test: /.jsx$/,
+					loader: "babel-loader",
+					exclude: /node_modules/,
+					query: {
+						presets: ["es2015", "react"]
+					}
+				}, {
+					test: /\.js$/,
+					exclude: /node_modules/,
+					loader: "babel-loader",
+					query: {
+						presets: ["es2015"]
+					}
+				}]
+			}
+		}))
+		.on("error", function() {
+			console.dir(arguments);
+		})
+		.pipe(gulp.dest("./__tests__"))
+		.on("end", function() {
+			jest.runCLI({"_": ["specs"]}, __dirname, function() {
+				done();
+			});
+		});
 
 });
 

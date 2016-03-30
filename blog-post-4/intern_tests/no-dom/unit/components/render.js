@@ -1,20 +1,20 @@
 define([
-  'intern!object',
-  'intern/chai!assert',
-	'intern/dojo/node!react/dist/react-with-addons',
-	'intern/dojo/node!../../../dist/www/js/render-demo-test'
+	"intern!object",
+	"intern/chai!assert",
+	"intern/dojo/node!react/dist/react-with-addons",
+	"intern/dojo/node!../../../dist/www/js/render-demo-test"
 ], function (registerSuite, assert, React, RenderDemoTest) {
 
 	// cut down on typing
 	var TestUtils = React.addons.TestUtils;
 
-  registerSuite({
+	registerSuite({
 
 		// name of the unit test suite
-		name: 'React Components',
+		name: "React Components",
 
 		// unit test
-    renderDemoTest: function() {
+		renderDemoTest: function() {
 
 			const shallowRenderer = TestUtils.createRenderer();
 			shallowRenderer.render(React.createElement(RenderDemoTest));
@@ -22,7 +22,6 @@ define([
 			const component = shallowRenderer.getRenderOutput();
 
 			assert.strictEqual(component.props.children, "Hello World!", "initial dom");
-    }
-
-  });
+		}
+	});
 });
