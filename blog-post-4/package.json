@@ -6,6 +6,8 @@
   "author": "Eric W. Greene",
   "license": "MIT",
   "scripts": {
+		"start": "gulp; node index",
+		"clean": "rm -rf node_modules; rm -rf dist",
     "test": "jest --coverage"
   },
   "devDependencies": {
