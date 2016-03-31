@@ -1,10 +1,9 @@
-module.exports = function(options) {
+"use strict";
 
-	"use strict";
+import http from "http";
+import express from "express";
 
-	const
-		http = require("http"),
-		express = require("express");
+export default function(options) {
 
 	let
 		app = express(),
@@ -48,4 +47,4 @@ module.exports = function(options) {
 
 		}
 	};
-};
+}

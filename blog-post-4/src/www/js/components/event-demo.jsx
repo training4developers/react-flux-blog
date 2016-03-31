@@ -1,7 +1,6 @@
 "use strict";
 
-const
-	React = require("react");
+import React from "react"; // eslint-disable-line no-unused-vars
 
 module.exports = React.createClass({
 

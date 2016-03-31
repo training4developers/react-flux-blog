@@ -1,9 +1,8 @@
 "use strict";
 
-const
-	React = require("react");
+import React from "react";
 
-module.exports = class DemoRow extends React.Component {
+module.exports = class extends React.Component {
 
 	render() {
 		return (
@@ -14,4 +13,5 @@ module.exports = class DemoRow extends React.Component {
 			</tr>
 		);
 	}
+
 };

@@ -43,6 +43,7 @@ gulp.task("server", function() {
 
 });
 
+// update web pack to use babel loader
 gulp.task("webpack", ["babel", "copy"], function() {
 
 	return gulp.src("./dist/www/js/index.js")
@@ -67,8 +68,22 @@ gulp.task("test", function(done) {
 				filename: "specs.js",
 				publicPath: "/__tests__/"
 			},
-
+			resolve: {
+				alias: {
+					"sinon": "sinon/pkg/sinon"
+				}
+			},
+			externals: {
+				//"jsdom": "window",
+				"cheerio": "window",
+				//"sinon": "sinon",
+				"react/lib/ExecutionEnvironment": true,
+				"react/lib/ReactContext": true
+			},
 			module: {
+				noParse: [
+					/node_modules\/sinon\//
+				],
 				loaders: [{
 					test: /.jsx$/,
 					loader: "babel-loader",
@@ -91,14 +106,16 @@ gulp.task("test", function(done) {
 		})
 		.pipe(gulp.dest("./__tests__"))
 		.on("end", function() {
-			jest.runCLI({"_": ["specs"]}, __dirname, function() {
+			jest.runCLI({
+				"_": ["specs"]
+			}, __dirname, function() {
 				done();
 			});
 		});
 
 });
 
-gulp.task("default", ["webpack"], function () {
+gulp.task("default", ["webpack"], function() {
 
 	gulp.watch("src/www/js/**/*.jsx", ["webpack"]);
 

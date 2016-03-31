@@ -23,9 +23,8 @@ let demos = [
 	}
 ];
 
-const
-	React = require("react"), // eslint-disable-line no-unused-vars
-	ReactDOM = require("react-dom"),
-	DemoTable = require("./demo-table"); // eslint-disable-line no-unused-vars
+import React from "react"; // eslint-disable-line no-unused-vars
+import ReactDOM from "react-dom";
+import DemoTable from "./demo-table"; // eslint-disable-line no-unused-vars
 
 ReactDOM.render(<DemoTable demos={demos} />, document.querySelector("main"));
