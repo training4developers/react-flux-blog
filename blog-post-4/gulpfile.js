@@ -63,7 +63,7 @@ gulp.task("test", function(done) {
 
 	gulp.src("./__tests__/all.js")
 		.pipe(webpack({
-
+			target: "node",
 			output: {
 				filename: "specs.js",
 				publicPath: "/__tests__/"
@@ -74,9 +74,6 @@ gulp.task("test", function(done) {
 				}
 			},
 			externals: {
-				//"jsdom": "window",
-				"cheerio": "window",
-				//"sinon": "sinon",
 				"react/lib/ExecutionEnvironment": true,
 				"react/lib/ReactContext": true
 			},
@@ -85,6 +82,9 @@ gulp.task("test", function(done) {
 					/node_modules\/sinon\//
 				],
 				loaders: [{
+					test: /\.json$/,
+					loader: "json"
+				},{
 					test: /.jsx$/,
 					loader: "babel-loader",
 					exclude: /node_modules/,

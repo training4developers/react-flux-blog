@@ -1,14 +1,14 @@
 /*global jest describe it expect beforeEach*/
 
-// path needs to be relative to the spec location
-jest.unmock("../src/www/js/components/render-demo.jsx");
+"use strict";
 
 import React from "react"; // eslint-disable-line no-unused-vars
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import RenderDemo from "../../src/www/js/components/render-demo.jsx"; // eslint-disable-line no-unused-vars
 
-//const TestUtils = React.addons.TestUtils;
+// path needs to be relative to the spec location
+jest.unmock("../src/www/js/components/render-demo.jsx");
 
 describe("render", () => {
 

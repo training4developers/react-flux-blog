@@ -1,27 +1,26 @@
-define([
-	"intern!object",
-	"intern/chai!assert",
-	"intern/dojo/node!react/dist/react-with-addons",
-	"intern/dojo/node!../../../dist/www/js/render-demo-test"
-], function (registerSuite, assert, React, RenderDemoTest) {
+/*global jest describe beforeEach it expect*/
 
-	// cut down on typing
-	var TestUtils = React.addons.TestUtils;
+"use strict";
 
-	registerSuite({
+import React from "react"; // eslint-disable-line no-unused-vars
+import { shallow } from "enzyme";
+import RenderDemo from "../../src/www/js/components/render-demo.jsx"; // eslint-disable-line no-unused-vars
 
-		// name of the unit test suite
-		name: "React Components",
+// reference this from the folder location of specs.js
+jest.unmock("../src/www/js/components/render-demo.jsx");
 
-		// unit test
-		renderDemoTest: function() {
+describe("<RenderDemo /> No DOM", () => {
 
-			const shallowRenderer = TestUtils.createRenderer();
-			shallowRenderer.render(React.createElement(RenderDemoTest));
+	let component;
 
-			const component = shallowRenderer.getRenderOutput();
-
-			assert.strictEqual(component.props.children, "Hello World!", "initial dom");
-		}
+	beforeEach(() => {
+		component = shallow(<RenderDemo />);
 	});
+
+	it ("<RenderDemo /> renders", () => {
+
+		expect(component.props().children).toBe("Hello World!");
+
+	});
+
 });

@@ -2,11 +2,11 @@
 
 "use strict";
 
-jest.unmock("../src/www/js/components/event-demo.jsx");
-
 import React from "react"; //eslint-disable-line no-unused-vars
 import { shallow } from "enzyme";
 import EventDemo from "../../src/www/js/components/event-demo.jsx"; //eslint-disable-line no-unused-vars
+
+jest.unmock("../src/www/js/components/event-demo.jsx");
 
 describe("EventDemo Component with No DOM", () => {
 
@@ -21,13 +21,10 @@ describe("EventDemo Component with No DOM", () => {
 		expect(component.state().counter).toBe(1);
 		expect(component.childAt(0).props().children).toBe(1);
 
+		// simulate a click
 		component.find("button").simulate("click");
 
-		// component.find("button").props().onClick({
-		// 	preventDefault() {}
-		// });
-
-		component.render();
+		component.update();
 		expect(component.state().counter).toBe(2);
 		expect(component.childAt(0).props().children).toBe(2);
 

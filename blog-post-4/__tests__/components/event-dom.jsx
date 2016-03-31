@@ -2,12 +2,13 @@
 
 "use strict";
 
-jest.unmock("../src/www/js/components/event-demo.jsx");
-
 import React from "react"; // eslint-disable-line no-unused-vars
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import EventDemo from "../../src/www/js/components/event-demo.jsx"; // eslint-disable-line no-unused-vars
+
+// reference this from the folder location of specs.js
+jest.unmock("../src/www/js/components/event-demo.jsx");
 
 describe("EventDemo Component Tests with Mock DOM", () => {
 
