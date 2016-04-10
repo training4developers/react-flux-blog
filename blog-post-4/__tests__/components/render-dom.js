@@ -1,16 +1,16 @@
 /*global jest describe it expect beforeEach*/
 
-"use strict";
+'use strict';
 
-import React from "react"; // eslint-disable-line no-unused-vars
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import RenderDemo from "../../src/www/js/components/render-demo.jsx"; // eslint-disable-line no-unused-vars
+import React from 'react'; // eslint-disable-line no-unused-vars
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import RenderDemo from '../../src/www/js/components/render-demo.js'; // eslint-disable-line no-unused-vars
 
 // path needs to be relative to the spec location
-jest.unmock("../src/www/js/components/render-demo.jsx");
+jest.unmock('../src/www/js/components/render-demo.js');
 
-describe("render", () => {
+describe('<RenderDemo /> Mock DOM', () => {
 
 	let component;
 
@@ -21,10 +21,10 @@ describe("render", () => {
 		component = TestUtils.renderIntoDocument(<RenderDemo />);
 	});
 
-	it("should output Hello World", () => {
+	it('<RenderDemo /> renders', () => {
 
 		// examine the DOM to see if the React Component was rendered as expected
-		expect(ReactDOM.findDOMNode(component).textContent).toBe("Hello World!");
+		expect(ReactDOM.findDOMNode(component).textContent).toBe('Hello World!');
 
 	});
 });

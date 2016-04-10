@@ -1,17 +1,9 @@
 'use strict';
 
-import React from 'react';
-
-module.exports = class extends React.Component {
-
-	render() {
-		return (
-			<tr>
-				<td>{this.props.demo.name}</td>
-				<td>{this.props.demo.description}</td>
-				<td><a href={this.props.demo.url}>Run It!</a></td>
-			</tr>
-		);
-	}
-
+export default (props) => {
+	return <tr>
+			<td>{props.demo.name}</td>
+			<td>{props.demo.description}</td>
+			<td><a href={props.demo.url}>Run It!</a></td>
+		</tr>;
 };

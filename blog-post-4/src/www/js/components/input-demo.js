@@ -2,31 +2,24 @@
 
 import React from 'react';
 
-module.exports = React.createClass({
+export default class InputDemo extends React.Component {
 
-	getInitialState: function() {
-		return {
-			message: this.props.message
-		};
-	},
-
-	_onChange: function(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	},
-
-	render: function() {
-
-		return (
-			<form>
-				<label>
-					Message:
-					<input name='message' value={this.state.message} onChange={this._onChange} />
-				</label>
-			</form>
-		);
-
+	constructor(props) {
+		super(props);
+		this.state = Object.assign({}, this.props);
+		this._onChange = this._onChange.bind(this);
 	}
 
-});
+	_onChange(e) {
+		this.setState(Object.assign({}, this.state, { [e.target.name]: e.target.value }));
+	}
+
+	render() {
+		return <form>
+			<label>
+				Message: <input name='message' value={this.state.message} onChange={this._onChange} />
+			</label>
+		</form>;
+	}
+
+}

@@ -2,27 +2,25 @@
 
 import React from 'react'; // eslint-disable-line no-unused-vars
 
-module.exports = React.createClass({
+export default class EventDemo extends React.Component {
 
-	getInitialState: function() {
-		return {
+	constructor(props) {
+		super(props);
+		this.state = {
 			counter: 1
 		};
-	},
-
-	_onClick: function() {
-		this.setState({
-			counter: this.state.counter + 1
-		});
-	},
-
-	render: function() {
-		return (
-			<div>
-				<div>{this.state.counter}</div>
-				<button onClick={this._onClick}>Increment</button>
-			</div>
-		);
+		this._onClick = this._onClick.bind(this);
 	}
 
-});
+	_onClick() {
+		this.setState(Object.assign({}, this.state, { counter: this.state.counter + 1 }));
+	}
+
+	render() {
+		return <div>
+			<div>{this.state.counter}</div>
+			<button onClick={this._onClick}>Increment</button>
+		</div>;
+	}
+
+}

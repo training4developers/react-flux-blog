@@ -6,8 +6,9 @@
   "author": "Eric W. Greene",
   "license": "MIT",
   "scripts": {
-		"start": "gulp; node index",
-		"clean": "rm -rf node_modules; rm -rf dist",
+    "start": "gulp start-web-server",
+    "dev": "gulp",
+    "clean": "rm -rf node_modules; rm -rf dist",
     "test": "jest --coverage"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
     "jest-cli": "^0.9.2",
+    "json-loader": "^0.5.4",
     "react-addons-test-utils": "^0.14.7",
     "sinon": "^1.17.3",
     "skin-deep": "^0.16.0",

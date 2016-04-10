@@ -14,8 +14,8 @@ export default function(options) {
 	return {
 		start: function() {
 
-			return new Promise(function(resolve, reject) {
-				server.listen(options.port, function(err) {
+			return new Promise((resolve, reject) => {
+				server.listen(options.port, (err) => {
 
 					if (err) {
 						reject(err);
@@ -30,8 +30,8 @@ export default function(options) {
 		},
 		stop: function() {
 
-			return new Promise(function(resolve, reject) {
-				server.close(function(err) {
+			return new Promise((resolve, reject) => {
+				server.close((err) => {
 
 					if (err) {
 						reject(err);
