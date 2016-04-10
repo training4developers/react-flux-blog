@@ -48,11 +48,13 @@
 
 	__webpack_require__(1);
 
+	__webpack_require__(414);
+
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*global jest describe beforeEach it expect*/
+	/*global jest describe it beforeEach expect*/
 
 	'use strict';
 
@@ -62,42 +64,38 @@
 
 	var _enzyme = __webpack_require__(158);
 
-	var _inputDemo = __webpack_require__(413);
+	var _eventDemo = __webpack_require__(413);
 
-	var _inputDemo2 = _interopRequireDefault(_inputDemo);
+	var _eventDemo2 = _interopRequireDefault(_eventDemo);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// eslint-disable-line no-unused-vars
+	//eslint-disable-line no-unused-vars
 
-	// reference this from the folder location of specs.js
-	// eslint-disable-line no-unused-vars
-	jest.unmock('../src/www/js/components/input-demo.js');
+	//eslint-disable-line no-unused-vars
+	jest.unmock('../src/www/js/components/event-demo.js');
 
-	describe('<InputDemo /> No DOM', function () {
+	describe('<EventDemo /> No DOM', function () {
 
-		var message = 'Original Value!';
-		var newMessage = 'New Value!';
+		var message = "test";
 
 		var component = void 0;
 
 		beforeEach(function () {
-			component = (0, _enzyme.shallow)(_react2.default.createElement(_inputDemo2.default, { message: message }));
+			component = (0, _enzyme.shallow)(_react2.default.createElement(_eventDemo2.default, { message: message }));
 		});
 
-		it('<InputDemo /> updates state and input with new value', function () {
+		it('<EventDemo /> state should update when button is clicked', function () {
 
-			expect(component.props().message).toBe(message);
-			//expect(component.state().message).toBe(message);
-			//expect(component.childAt(0).props().value).toBe(message);
+			expect(component.state().counter).toBe(1);
+			expect(component.childAt(0).props().children).toBe(1);
 
 			// simulate a click
-			// component.find('button').simulate('change', { target: { name: 'message', value: newMessage }});
-			// component.update();
-			//
-			// expect(component.props().message).toBe(message);
-			// expect(component.state().message).toBe(newMessage);
-			// expect(component.childAt(0).props().value).toBe(newMessage);
+			component.find('button').simulate('click');
+
+			component.update();
+			expect(component.state().counter).toBe(2);
+			expect(component.childAt(0).props().children).toBe(2);
 		});
 	});
 
@@ -60357,6 +60355,128 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// eslint-disable-line no-unused-vars
+
+	var EventDemo = function (_React$Component) {
+		_inherits(EventDemo, _React$Component);
+
+		function EventDemo(props) {
+			_classCallCheck(this, EventDemo);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventDemo).call(this, props));
+
+			_this.state = {
+				counter: 1
+			};
+			_this._onClick = _this._onClick.bind(_this);
+			return _this;
+		}
+
+		_createClass(EventDemo, [{
+			key: '_onClick',
+			value: function _onClick() {
+				this.setState(Object.assign({}, this.state, { counter: this.state.counter + 1 }));
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						null,
+						this.state.counter
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this._onClick },
+						'Increment'
+					)
+				);
+			}
+		}]);
+
+		return EventDemo;
+	}(_react2.default.Component);
+
+	exports.default = EventDemo;
+
+/***/ },
+/* 414 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*global jest describe beforeEach it expect*/
+
+	'use strict';
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _enzyme = __webpack_require__(158);
+
+	var _inputDemo = __webpack_require__(415);
+
+	var _inputDemo2 = _interopRequireDefault(_inputDemo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// eslint-disable-line no-unused-vars
+
+	// reference this from the folder location of specs.js
+	// eslint-disable-line no-unused-vars
+	jest.unmock('../src/www/js/components/input-demo.js');
+
+	describe('<InputDemo /> No DOM', function () {
+
+		var message = 'Original Value!';
+		var newMessage = 'New Value!';
+
+		var component = void 0;
+
+		beforeEach(function () {
+			component = (0, _enzyme.shallow)(_react2.default.createElement(_inputDemo2.default, { message: message }));
+		});
+
+		it('<InputDemo /> updates state and input with new value', function () {
+
+			expect(component.state().message).toBe(message);
+			expect(component.childAt(0).childAt(1).props().value).toBe(message);
+
+			// simulate a click
+			component.find('input').simulate('change', { target: { name: 'message', value: newMessage } });
+			component.update();
+
+			expect(component.state().message).toBe(newMessage);
+			expect(component.childAt(0).childAt(1).props().value).toBe(newMessage);
+		});
+	});
+
+/***/ },
+/* 415 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60373,7 +60493,7 @@
 
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InputDemo).call(this, props));
 
-			_this.state = Object.assign({}, _this.props);
+			_this.state = Object.assign({}, props);
 			_this._onChange = _this._onChange.bind(_this);
 			return _this;
 		}
@@ -60388,10 +60508,10 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'form',
-					null,
+					{ id: 'form' },
 					_react2.default.createElement(
 						'label',
-						null,
+						{ id: 'label' },
 						'Message: ',
 						_react2.default.createElement('input', { name: 'message', value: this.state.message, onChange: this._onChange })
 					)

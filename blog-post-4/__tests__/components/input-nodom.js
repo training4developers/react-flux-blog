@@ -22,17 +22,15 @@ describe('<InputDemo /> No DOM', () => {
 
 	it('<InputDemo /> updates state and input with new value', () => {
 
-		expect(component.props().message).toBe(message);
-		//expect(component.state().message).toBe(message);
-		//expect(component.childAt(0).props().value).toBe(message);
+		expect(component.state().message).toBe(message);
+		expect(component.childAt(0).childAt(1).props().value).toBe(message);
 
 		// simulate a click
-		// component.find('button').simulate('change', { target: { name: 'message', value: newMessage }});
-		// component.update();
-		//
-		// expect(component.props().message).toBe(message);
-		// expect(component.state().message).toBe(newMessage);
-		// expect(component.childAt(0).props().value).toBe(newMessage);
+		component.find('input').simulate('change', { target: { name: 'message', value: newMessage }});
+		component.update();
+
+		expect(component.state().message).toBe(newMessage);
+		expect(component.childAt(0).childAt(1).props().value).toBe(newMessage);
 
 	});
 

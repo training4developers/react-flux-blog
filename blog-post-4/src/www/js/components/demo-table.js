@@ -1,5 +1,6 @@
 'use strict';
 
+import React from 'react'; // eslint-disable-line no-unused-vars
 import DemoRow from './demo-row'; // eslint-disable-line no-unused-vars
 
 export default (props) => {

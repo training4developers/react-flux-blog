@@ -6,7 +6,7 @@ export default class InputDemo extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = Object.assign({}, this.props);
+		this.state = Object.assign({}, props);
 		this._onChange = this._onChange.bind(this);
 	}
 
@@ -15,8 +15,8 @@ export default class InputDemo extends React.Component {
 	}
 
 	render() {
-		return <form>
-			<label>
+		return <form id='form'>
+			<label id='label'>
 				Message: <input name='message' value={this.state.message} onChange={this._onChange} />
 			</label>
 		</form>;

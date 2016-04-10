@@ -1,6 +1,7 @@
 'use strict';
 
 import http from 'http';
+import path from 'path';
 import express from 'express';
 
 export default function(options) {
@@ -8,7 +9,7 @@ export default function(options) {
 	const app = express();
 	const server = http.createServer(app);
 
-	app.use('/libs', express.static('../node_modules'));
+	app.use('/libs', express.static(path.join(__dirname, '../node_modules')));
 	app.use(express.static(options.folder));
 
 	return {

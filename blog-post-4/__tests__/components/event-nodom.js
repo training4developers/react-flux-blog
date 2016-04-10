@@ -10,10 +10,12 @@ jest.unmock('../src/www/js/components/event-demo.js');
 
 describe('<EventDemo /> No DOM', () => {
 
+	const message = "test";
+
 	let component;
 
 	beforeEach(() => {
-		component = shallow(<EventDemo />);
+		component = shallow(<EventDemo message={message} />);
 	});
 
 	it('<EventDemo /> state should update when button is clicked', () => {
