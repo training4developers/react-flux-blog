@@ -1,128 +1,100 @@
-"use strict";
+'use strict';
 
-const
-	webpack = require("webpack-stream"),
-	gulp = require("gulp"),
-	babel = require("gulp-babel"),
-	jest = require("jest-cli");
+const fs = require('fs');
+const path = require('path');
 
-gulp.task("babel", function() {
+const webpack = require('webpack-stream');
+const gulp = require('gulp');
+const babel = require('gulp-babel');
 
-	return gulp.src("src/www/js/**/*.jsx")
-		.pipe(babel())
-		.on("error", function() {
-			console.dir(arguments);
-		})
-		.pipe(gulp.dest("dist/www/js"));
+const serverAppFiles = ['src/**/*.js','!src/www/**'];
+const webAppHtmlFiles = ['src/www/**/*.html'];
+const webAppJsFiles = ['./src/www/js/**/*.js'];
 
-});
+const entryPoints = [
+	'./src/www/js/index.js',
+	'./src/www/js/render-demo.js',
+	'./src/www/js/event-demo.js',
+	'./src/www/js/input-demo.js'
+];
 
-gulp.task("copy", function() {
+gulp.task('process-server-app', function() {
 
-	gulp.src("src/*.js")
-		.pipe(gulp.dest("dist"));
-
-	gulp.src("src/www/**/*.html")
-		.pipe(gulp.dest("dist/www"));
-
-	gulp.src("src/www/libs/**/*")
-		.pipe(gulp.dest("dist/www/libs"));
+	return gulp.src(serverAppFiles)
+		.pipe(babel({ presets: ['react','es2015'] }))
+		.on('error', console.dir)
+		.pipe(gulp.dest('dist'));
 
 });
 
-gulp.task("server", function() {
+gulp.task('process-web-app-html', function() {
 
-	var options = {
-		port: 8080,
-		folder: "dist/www"
-	};
+	gulp.src(webAppHtmlFiles)
+		.pipe(gulp.dest('dist/www'));
 
-	require("./dist/server.js")(options).start().then(function() {
-		console.log(`web server started on port ${options.port}`);
+});
+
+
+gulp.task('process-web-app-js', function() {
+
+	return Promise.all(entryPoints.map(function(entryPoint) {
+
+		return new Promise((resolve, reject) => {
+
+			return gulp.src(entryPoint)
+				.pipe(webpack({
+					output: {
+						filename: path.basename(entryPoint)
+					},
+					module: {
+						loaders: [{
+							test: /\.json$/,
+							loader: 'json'
+						},{
+							test: /\.jsx*$/,
+							loader: 'babel-loader',
+							exclude: /node_modules/,
+							query: {
+								presets: ['react', 'es2015']
+							}
+						}]
+					}
+				}))
+				.on('error', reject)
+				.pipe(gulp.dest('dist/www/js'))
+				.on('end', resolve);
+
+		});
+
+	})).catch(err => console.dir(err));
+
+});
+
+gulp.task('start-web-server', function() {
+
+	fs.readFile('./config.json', function(err, data) {
+
+		if (err) {
+			console.dir(err);
+			return;
+		}
+
+		const config = JSON.parse(data);
+
+		require('./dist/server.js').default(config.webServer).start().then(function() {
+			console.log(`web server started on port ${config.webServer.port}`);
+		});
 	});
 
 });
 
-// update web pack to use babel loader
-gulp.task("webpack", ["babel", "copy"], function() {
+gulp.task('default', [
+	'process-server-app',
+	'process-web-app-html',
+	'process-web-app-js'], function() {
 
-	return gulp.src("./dist/www/js/index.js")
-		.pipe(webpack({
-			output: {
-				filename: "app-webpack.js"
-			}
-		}))
-		.on("error", function() {
-			console.dir(arguments);
-		})
-		.pipe(gulp.dest("./dist/www/js"));
+		gulp.watch(serverAppFiles, ['process-server-app']);
+		gulp.watch(webAppHtmlFiles, ['process-web-app-html']);
+		gulp.watch(webAppJsFiles, ['process-web-app-js']);
 
-});
-
-gulp.task("test", function(done) {
-
-	gulp.src("./__tests__/all.js")
-		.pipe(webpack({
-			target: "node",
-			output: {
-				filename: "specs.js",
-				publicPath: "/__tests__/"
-			},
-			resolve: {
-				alias: {
-					"sinon": "sinon/pkg/sinon"
-				}
-			},
-			externals: {
-				"react/lib/ExecutionEnvironment": true,
-				"react/lib/ReactContext": true
-			},
-			module: {
-				noParse: [
-					/node_modules\/sinon\//
-				],
-				loaders: [{
-					test: /\.json$/,
-					loader: "json"
-				},{
-					test: /.jsx$/,
-					loader: "babel-loader",
-					exclude: /node_modules/,
-					query: {
-						presets: ["es2015", "react"]
-					}
-				}, {
-					test: /\.js$/,
-					exclude: /node_modules/,
-					loader: "babel-loader",
-					query: {
-						presets: ["es2015"]
-					}
-				}]
-			}
-		}))
-		.on("error", function() {
-			console.dir(arguments);
-		})
-		.pipe(gulp.dest("./__tests__"))
-		.on("end", function() {
-			jest.runCLI({
-				"_": ["specs"]
-			}, __dirname, function() {
-				done();
-			});
-		});
-
-});
-
-gulp.task("default", ["webpack"], function() {
-
-	gulp.watch("src/www/js/**/*.jsx", ["webpack"]);
-
-	gulp.watch([
-		"src/*.js",
-		"src/www/**/*.html",
-		"src/www/libs/**/*"
-	], ["copy"]);
-
-});
+	});
