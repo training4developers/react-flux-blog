@@ -25,7 +25,6 @@ describe('<InputDemo /> No DOM', () => {
 		expect(component.state().message).toBe(message);
 		expect(component.childAt(0).childAt(1).props().value).toBe(message);
 
-		// simulate a click
 		component.find('input').simulate('change', { target: { name: 'message', value: newMessage }});
 		component.update();
 

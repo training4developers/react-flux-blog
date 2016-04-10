@@ -18,9 +18,7 @@ describe('<RenderDemo /> No DOM', () => {
 	});
 
 	it ('<RenderDemo /> renders', () => {
-
 		expect(component.props().children).toBe('Hello World!');
-
 	});
 
 });

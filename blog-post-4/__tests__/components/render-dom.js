@@ -13,18 +13,15 @@ jest.unmock('../src/www/js/components/render-demo.js');
 describe('<RenderDemo /> Mock DOM', () => {
 
 	let component;
+	let componentDOMNode;
 
 	beforeEach(() => {
-		// renders the React Component into a detached DOM node
-		// requires the test to execute within a container which contains a DOM such as a web browser
-		// returns a reference to the rendered component
-		component = TestUtils.renderIntoDocument(<RenderDemo />);
+		component = TestUtils.renderIntoDocument(<div><RenderDemo /></div>);
+		componentDOMNode = ReactDOM.findDOMNode(component).querySelector('h1');
 	});
 
 	it('<RenderDemo /> renders', () => {
-
-		// examine the DOM to see if the React Component was rendered as expected
-		expect(ReactDOM.findDOMNode(component).textContent).toBe('Hello World!');
-
+		expect(componentDOMNode.textContent).toBe('Hello World!');
 	});
+	
 });

@@ -42,4 +42,5 @@ blog-post-4/dist
 blog-post-5/dist
 blog-post-6/dist
 
-#specs.js
+# exclude unit testing webpack file
+specs.js

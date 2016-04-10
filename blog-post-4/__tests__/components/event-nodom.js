@@ -10,12 +10,10 @@ jest.unmock('../src/www/js/components/event-demo.js');
 
 describe('<EventDemo /> No DOM', () => {
 
-	const message = "test";
-
 	let component;
 
 	beforeEach(() => {
-		component = shallow(<EventDemo message={message} />);
+		component = shallow(<EventDemo />);
 	});
 
 	it('<EventDemo /> state should update when button is clicked', () => {
@@ -23,7 +21,6 @@ describe('<EventDemo /> No DOM', () => {
 		expect(component.state().counter).toBe(1);
 		expect(component.childAt(0).props().children).toBe(1);
 
-		// simulate a click
 		component.find('button').simulate('click');
 
 		component.update();
