@@ -1,14 +1,16 @@
-'use strict';
+"use strict";
 
-import http from 'http';
-import express from 'express';
+import http from "http";
+import express from "express";
 
 export default function(options) {
 
-	const app = express();
-	const server = http.createServer(app);
+	let
+		app = express(),
+		server = http.createServer(app);
 
-	app.use('/libs', express.static('../node_modules'));
+	app.use("/libs", express.static("../node_modules"));
+
 	app.use(express.static(options.folder));
 
 	return {
