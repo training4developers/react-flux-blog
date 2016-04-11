@@ -6,7 +6,7 @@ export default class WidgetForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = Object.assign({}, props);
+		this.state = Object.assign({ widget: {} }, props);
 		this._onChange = this._onChange.bind(this);
 		this._onClick = this._onClick.bind(this);
 	}
@@ -17,7 +17,8 @@ export default class WidgetForm extends React.Component {
 	}
 
 	_onClick() {
-		console.log(this.state.widget);
+		this.props.submitWidget(Object.assign({}, this.state.widget));
+		this.setState({ widget: { name: '', description: '', color: '', size: '', quantity: 0 } });
 	}
 
 	render() {

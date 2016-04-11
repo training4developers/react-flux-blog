@@ -26,7 +26,7 @@ fs.readFile(path.join(__dirname, 'widgets.json'), function(err, data) {
 	JSON.parse(data).forEach(function(widget) {
 		widgets.push(new Widget(widget));
 	});
-	nextWidgetId = widgets.length;
+	nextWidgetId = widgets.length + 1;
 
 });
 
@@ -66,7 +66,7 @@ const widgetType = new GraphQLObjectType({
 
 const insertWidgetInputType = new GraphQLInputObjectType({
 
-	name: 'Widget',
+	name: 'InsertWidgetInput',
 	description: 'A widget',
 	fields: () => ({
 		name: {
