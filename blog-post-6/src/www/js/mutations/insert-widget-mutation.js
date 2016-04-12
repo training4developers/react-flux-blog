@@ -2,10 +2,10 @@
 
 import Relay from 'react-relay';
 
-export default class extends Relay.Mutation {
+export default class InsertWidgetMutation extends Relay.Mutation {
 
 	static fragments = {
-    widget: () => Relay.QL`fragment on Widget { id }`
+    user: () => Relay.QL`fragment on User { id }`
   };
 
 	getMutation() {
@@ -14,23 +14,34 @@ export default class extends Relay.Mutation {
 
 	getFatQuery() {
     return Relay.QL`
-      fragment on InsertWidgetPayload {
-				widget {
-					id,
-					name,
-					description,
-					color,
-					size,
-					quantity
-				}
-      }`;
+		fragment on InsertWidgetPayload @relay(pattern: true) {
+      user {
+        widgets {
+          edges {
+            node {
+							id
+              name
+							description
+							color
+							size
+							quantity
+            }
+          }
+        }
+      }
+      newWidgetEdge
+    }`;
   }
 
 	getConfigs() {
     return [{
-      type: 'FIELDS_CHANGE',
-      fieldIDs: {
-        widget: this.props.widget.id,
+			type: 'RANGE_ADD',
+      parentName: 'user',
+      parentID: this.props.user.id,
+      connectionName: 'widgets',
+      edgeName: 'newWidgetEdge',
+      rangeBehaviors: {
+        '': 'append',
       },
     }];
   }
@@ -42,7 +53,7 @@ export default class extends Relay.Mutation {
 				description: this.props.description,
 				color: this.props.color,
 				size: this.props.size,
-				quantity: this.props.quantity,
+				quantity: parseInt(this.props.quantity, 10),
     	}
 		};
   }

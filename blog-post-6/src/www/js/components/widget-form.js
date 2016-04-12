@@ -1,12 +1,14 @@
 'use strict';
 
 import React from 'react';
+import Relay from 'react-relay';
+import InsertWidgetMutation from '../mutations/insert-widget-mutation';
 
 export default class WidgetForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = Object.assign({ widget: {} }, props);
+		this.state = Object.assign({ widget: { name: '', description: '', color: '', size: '', quantity: 0 } }, props);
 		this._onChange = this._onChange.bind(this);
 		this._onClick = this._onClick.bind(this);
 	}
@@ -17,7 +19,9 @@ export default class WidgetForm extends React.Component {
 	}
 
 	_onClick() {
-		this.props.submitWidget(Object.assign({}, this.state.widget));
+		Relay.Store.commitUpdate(
+			new InsertWidgetMutation(Object.assign({ user: this.props.user, widget: null }, this.state.widget)));
+			//new InsertWidgetMutation(Object.assign({ user: { id: 1 }, widget: null }, this.state.widget)));
 		this.setState({ widget: { name: '', description: '', color: '', size: '', quantity: 0 } });
 	}
 

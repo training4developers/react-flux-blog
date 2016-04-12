@@ -12,11 +12,11 @@ export default (props) => <table className='table table-striped'>
 		</tr>
 	</thead>
 	<tbody>
-		{props.widgets.map(widget => <tr key={widget.id}>
-			<td>{widget.name}</td>
-			<td>{widget.color}</td>
-			<td>{widget.size}</td>
-			<td>{widget.quantity}</td>
+		{props.user.widgets.edges.map(edge => <tr key={edge.node.id}>
+			<td>{edge.node.name}</td>
+			<td>{edge.node.color}</td>
+			<td>{edge.node.size}</td>
+			<td>{edge.node.quantity}</td>
 		</tr>)}
 	</tbody>
 </table>;

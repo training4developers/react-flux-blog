@@ -20,7 +20,7 @@ const entryPoints = [
 gulp.task('process-server-app', () => {
 
 	return gulp.src(serverAppFiles)
-		.pipe(babel({ presets: ['react','es2015'] }))
+		.pipe(babel({ presets: ['es2015'] }))
 		.on('error', console.dir)
 		.pipe(gulp.dest('dist'));
 
@@ -38,9 +38,9 @@ gulp.task('process-web-app-js', () =>
 
 	Promise.all(entryPoints.map(entryPoint =>
 
-		new Promise((resolve, reject) => {
+		new Promise((resolve, reject) =>
 
-			return gulp.src(entryPoint)
+			gulp.src(entryPoint)
 				.pipe(webpackStream({
 					output: {
 						filename: path.basename(entryPoint)
@@ -54,6 +54,7 @@ gulp.task('process-web-app-js', () =>
 							loader: 'babel-loader',
 							exclude: /node_modules/,
 							query: {
+								passPerPreset: true, // needed for relay processing
 								presets: [
 									{ 'plugins': [ './build/babelRelayPlugin' ] },
 									'react', 'es2015', 'stage-0']
@@ -70,9 +71,7 @@ gulp.task('process-web-app-js', () =>
 				}))
 				.on('error', reject)
 				.pipe(gulp.dest('dist/www/js'))
-				.on('end', resolve);
-
-		})
+				.on('end', resolve))
 
 	)).catch(err => console.dir(err))
 
@@ -102,8 +101,8 @@ gulp.task('default', [
 	'process-web-app-js'
 ], () => {
 
-	gulp.watch(serverAppFiles, ['process-server-app']);
-	gulp.watch(webAppHtmlFiles, ['process-web-app-html']);
-	gulp.watch(webAppJsFiles, ['process-web-app-js']);
+	//gulp.watch(serverAppFiles, ['process-server-app']);
+	//gulp.watch(webAppHtmlFiles, ['process-web-app-html']);
+	//gulp.watch(webAppJsFiles, ['process-web-app-js']);
 
 });

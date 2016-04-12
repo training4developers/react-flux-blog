@@ -7,13 +7,19 @@ import InsertWidgetMutation from '../mutations/insert-widget-mutation';
 export default Relay.createContainer(WidgetForm, {
 	fragments: {
 		node: () => Relay.QL`
-			fragment on Widget {
-				id,
-				name,
-				description,
-				color,
-				size,
-				quantity,
+			fragment on User {
+				widgets {
+					edges {
+						node {
+							id,
+							name,
+							description,
+							color,
+							size,
+							quantity
+						}
+					}
+				},
 				${InsertWidgetMutation.getFragment('widget')}
 			}`
 	}

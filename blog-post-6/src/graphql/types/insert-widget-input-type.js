@@ -2,9 +2,9 @@
 
 import { GraphQLInputObjectType, GraphQLInt, GraphQLString } from 'graphql';
 
-export const widgetTypeInput = new GraphQLInputObjectType({
-	name: 'WidgetInput',
-	description: 'An update input widget object',
+export const insertWidgetInputType = new GraphQLInputObjectType({
+	name: 'InputInsertWidget',
+	description: 'An insert widget object',
 	fields: () => ({
 		name: {
 			type: GraphQLString,

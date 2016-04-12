@@ -1,10 +1,10 @@
 'use strict';
 
-import Widget from '../../models/widget';
-import { widgetType } from './widget-type';
+import { userType } from './user-type';
 import { insertWidgetInputType } from './insert-widget-input-type';
-import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
-import { insertWidget } from '../../database';
+import { WidgetEdge } from '../widget-connection';
+import { mutationWithClientMutationId, cursorForObjectInConnection } from 'graphql-relay';
+import { insertWidget, getUser, getWidgets } from '../../database';
 
 export const insertWidgetMutation = mutationWithClientMutationId({
 	name: 'InsertWidget',
@@ -12,13 +12,20 @@ export const insertWidgetMutation = mutationWithClientMutationId({
 		widget: { type: insertWidgetInputType }
 	},
 	outputFields: {
-		widget: {
-			type: widgetType,
-			resolve: widget => new Widget(widget)
+		user: {
+			type: userType,
+			resolve: () => getUser(1)
+		},
+		newWidgetEdge: {
+			type: WidgetEdge,
+			resolve: widget => {
+				console.log("made it here...", widget);
+				return { cursor: cursorForObjectInConnection(getWidgets(), widget),
+				node: widget };
+			}
 		}
 	},
 	mutateAndGetPayload: ({widget}) => {
-		widget._id = fromGlobalId(widget.id).id;
 		return insertWidget(widget);
 	}
 });
