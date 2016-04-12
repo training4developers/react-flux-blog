@@ -21,7 +21,6 @@ export default class WidgetForm extends React.Component {
 	_onClick() {
 		Relay.Store.commitUpdate(
 			new InsertWidgetMutation(Object.assign({ user: this.props.user, widget: null }, this.state.widget)));
-			//new InsertWidgetMutation(Object.assign({ user: { id: 1 }, widget: null }, this.state.widget)));
 		this.setState({ widget: { name: '', description: '', color: '', size: '', quantity: 0 } });
 	}
 

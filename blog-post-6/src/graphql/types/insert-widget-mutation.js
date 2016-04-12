@@ -18,11 +18,9 @@ export const insertWidgetMutation = mutationWithClientMutationId({
 		},
 		newWidgetEdge: {
 			type: WidgetEdge,
-			resolve: widget => {
-				console.log("made it here...", widget);
-				return { cursor: cursorForObjectInConnection(getWidgets(), widget),
-				node: widget };
-			}
+			resolve: widget => ({
+				cursor: cursorForObjectInConnection(getWidgets(), widget),
+				node: widget })
 		}
 	},
 	mutateAndGetPayload: ({widget}) => {
