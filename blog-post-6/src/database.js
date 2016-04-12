@@ -29,4 +29,5 @@ export const getWidget = (id) => widgets.find(w => w.id === parseInt(id, 10));
 export const insertWidget = (widget) => {
 	widget.id = nextWidgetId++;
 	widgets.push(widget);
+	return widget;
 };
