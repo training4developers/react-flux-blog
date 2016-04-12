@@ -108,7 +108,7 @@ gulp.task('default', [
 	'process-server-app',
 	'process-web-app-html',
 	'process-web-app-js'
-], function() {
+], () => {
 
 	gulp.watch(serverDataFiles, ['process-data-files']);
 	gulp.watch(serverAppFiles, ['process-server-app']);
