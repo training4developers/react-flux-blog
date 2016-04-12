@@ -1,25 +1,16 @@
 'use strict';
 
 import React from 'react'; // eslint-disable-line no-unused-vars
+import Relay from 'react-relay'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
-import WidgetTable from './components/widget-table'; // eslint-disable-line no-unused-vars
-import WidgetForm from './components/widget-form'; // eslint-disable-line no-unused-vars
-import { getWidgets, insertWidget } from './data/widgets';
 
-const insertAndGetWidgets = (widget) => {
-	return insertWidget(widget)
-		.then(() => getWidgets())
-		.then(widgets => render(widgets))
-		.catch(err => console.error(err));
-};
+import WidgetTable from './containers/widget-table';
+//import WidgetForm from './containers/widget-form';
+import HomeRoute from './routes/home';
+//import NodeRoute from './routes/node';
 
-const render = widgets => ReactDOM.render(
-	<div>
-		<WidgetTable widgets={widgets} />
-		<WidgetForm submitWidget={insertAndGetWidgets} />
-	</div>
-, document.querySelector('main'));
-
-getWidgets()
-	.then(widgets => render(widgets))
-	.catch(err => console.error(err));
+ReactDOM.render(
+	<Relay.RootContainer
+		Component={WidgetTable}
+		route={new HomeRoute()}
+	/>, document.querySelector('main'));
