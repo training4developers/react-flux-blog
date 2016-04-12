@@ -8,23 +8,14 @@ const webpackStream = require('webpack-stream');
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 
-const serverDataFiles = ['src/graphql/widgets.json'];
 const serverAppFiles = ['src/**/*.js','!src/www/**'];
 const webAppHtmlFiles = ['src/www/**/*.html'];
 const webAppJsFiles = ['src/www/js/**/*.js'];
 
 const entryPoints = [
 	'./src/www/js/index.js',
-	'./src/www/js/widgets.js',
-	'./src/www/js/widgets-relay.js'
+	'./src/www/js/widgets.js'
 ];
-
-gulp.task('process-data-files', () => {
-
-	return gulp.src(serverDataFiles)
-		.pipe(gulp.dest('dist/graphql'));
-
-});
 
 gulp.task('process-server-app', () => {
 
@@ -106,13 +97,11 @@ gulp.task('start-web-server', () => {
 });
 
 gulp.task('default', [
-	'process-data-files',
 	'process-server-app',
 	'process-web-app-html',
 	'process-web-app-js'
 ], () => {
 
-	gulp.watch(serverDataFiles, ['process-data-files']);
 	gulp.watch(serverAppFiles, ['process-server-app']);
 	gulp.watch(webAppHtmlFiles, ['process-web-app-html']);
 	gulp.watch(webAppJsFiles, ['process-web-app-js']);
