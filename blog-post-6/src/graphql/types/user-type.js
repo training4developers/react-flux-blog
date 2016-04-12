@@ -1,7 +1,7 @@
 'use strict';
 
-import { nodeInterface } from './node-definitions';
-import { widgetConnection } from './widget-connection';
+import { nodeInterface } from './../node-definitions';
+import { widgetConnection } from './../widget-connection';
 import { GraphQLObjectType } from 'graphql';
 import { globalIdField, connectionArgs, connectionFromArray } from 'graphql-relay';
 import { getWidgets } from '../../database';

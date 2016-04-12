@@ -1,10 +1,10 @@
 'use strict';
 
-import User from '../../models/user';
-import Widget from '../../models/widget';
-import { userType } from './user-type';
-import { widgetType } from './widget-type';
-import { getUser, getWidget } from '../../database';
+import User from '../models/user';
+import Widget from '../models/widget';
+import { userType } from './types/user-type';
+import { widgetType } from './types/widget-type';
+import { getUser, getWidget } from '../database';
 import { nodeDefinitions, fromGlobalId } from 'graphql-relay';
 
 export const { nodeInterface, nodeField } =

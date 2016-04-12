@@ -1,6 +1,6 @@
 'use strict';
 
-import { nodeInterface } from './node-definitions';
+import { nodeInterface } from './../node-definitions';
 import { GraphQLObjectType, GraphQLInt, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 

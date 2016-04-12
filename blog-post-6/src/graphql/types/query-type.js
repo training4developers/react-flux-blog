@@ -1,7 +1,7 @@
 'use strict';
 
 import { userType } from './user-type';
-import { nodeField } from './node-definitions';
+import { nodeField } from './../node-definitions';
 import { GraphQLObjectType } from 'graphql';
 import { getUser } from '../../database';
 
