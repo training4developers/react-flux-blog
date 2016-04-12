@@ -14,7 +14,9 @@ const webAppHtmlFiles = ['src/www/**/*.html'];
 const webAppJsFiles = ['src/www/js/**/*.js'];
 
 const entryPoints = [
-	'./src/www/js/index.js'
+	'./src/www/js/index.js',
+	'./src/www/js/widgets.js',
+	'./src/www/js/widgets-relay.js'
 ];
 
 gulp.task('process-data-files', () => {
