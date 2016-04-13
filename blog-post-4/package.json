@@ -7,9 +7,7 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "gulp start-web-server",
-		"dev": "gulp",
-		"clean": "rm -rf node_modules; rm -rf dist",
-		"test": "jest --coverage"
+		"test": "gulp run-tests"
 	},
 	"devDependencies": {
 		"babel": "^6.5.2",
@@ -22,7 +20,7 @@
 		"enzyme": "^2.2.0",
 		"gulp": "^3.9.0",
 		"gulp-babel": "^6.1.1",
-		"jest-cli": "^0.9.2",
+		"jest-cli": "^11.0.0",
 		"json-loader": "^0.5.4",
 		"react-addons-test-utils": "^0.14.7",
 		"sinon": "^1.17.3",
