@@ -70,23 +70,14 @@ gulp.task('run-tests', (done) => {
 	gulp.src('__tests__/all.js')
 		.pipe(webpack({
 			target: 'node',
-			output: {
-				filename: 'specs.js',
-				publicPath: '/__tests__/'
-			},
-			resolve: {
-				alias: {
-					'sinon': 'sinon/pkg/sinon'
-				}
-			},
+			output: { filename: 'specs.js', publicPath: '/__tests__/' },
+			resolve: { alias: { 'sinon': 'sinon/pkg/sinon' } },
 			externals: {
 				'react/lib/ExecutionEnvironment': true,
 				'react/lib/ReactContext': true
 			},
 			module: {
-				noParse: [
-					/node_modules\/sinon\//
-				],
+				noParse: [/node_modules\/sinon\//],
 				loaders: [{
 					test: /\.json$/,
 					loader: 'json'
@@ -94,19 +85,14 @@ gulp.task('run-tests', (done) => {
 					test: /\.jsx*$/,
 					loader: 'babel-loader',
 					exclude: /node_modules/,
-					query: {
-						presets: ['react', 'es2015']
-					}
+					query: { presets: ['react', 'es2015'] }
 				}]
 			}
 		}))
 		.on('error', console.dir)
 		.pipe(gulp.dest('__tests__'))
-		.on('end', function() {
-			jest.runCLI({
-				'_': ['specs'],
-				coverage: true
-			}, __dirname, function() {
+		.on('end', () => {
+			jest.runCLI({ '_': ['specs'], coverage: true }, __dirname, () => {
 				done();
 			});
 		});
