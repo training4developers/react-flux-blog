@@ -18,8 +18,10 @@ export default function(options) {
 
 	return {
 		start: () => new Promise((resolve, reject) =>
-			server.listen(options.port, err => err ? reject(err) : resolve())),
+			server.listen(options.port, err =>
+				err ? reject(err) : resolve())),
 		stop: () => new Promise((resolve, reject) =>
-				server.close(err => err ? reject(err) : resolve()))
+				server.close(err =>
+					err ? reject(err) : resolve()))
 	};
 }

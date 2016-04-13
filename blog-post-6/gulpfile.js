@@ -10,36 +10,25 @@ const babel = require('gulp-babel');
 
 const serverAppFiles = ['src/**/*.js','!src/www/**'];
 const webAppHtmlFiles = ['src/www/**/*.html'];
-const webAppJsFiles = ['src/www/js/**/*.js'];
 
 const entryPoints = [
 	'./src/www/js/index.js',
 	'./src/www/js/widgets.js'
 ];
 
-gulp.task('process-server-app', () => {
-
-	return gulp.src(serverAppFiles)
+gulp.task('process-server-app', () =>
+	gulp.src(serverAppFiles)
 		.pipe(babel({ presets: ['es2015'] }))
 		.on('error', console.dir)
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest('dist')));
 
-});
-
-gulp.task('process-web-app-html', () => {
-
+gulp.task('process-web-app-html', () =>
 	gulp.src(webAppHtmlFiles)
-		.pipe(gulp.dest('dist/www'));
-
-});
-
+		.pipe(gulp.dest('dist/www')));
 
 gulp.task('process-web-app-js', () =>
-
 	Promise.all(entryPoints.map(entryPoint =>
-
 		new Promise((resolve, reject) =>
-
 			gulp.src(entryPoint)
 				.pipe(webpackStream({
 					output: {
@@ -71,38 +60,18 @@ gulp.task('process-web-app-js', () =>
 				}))
 				.on('error', reject)
 				.pipe(gulp.dest('dist/www/js'))
-				.on('end', resolve))
+				.on('end', resolve)))).catch(err => console.dir(err)));
 
-	)).catch(err => console.dir(err))
-
-);
-
-gulp.task('start-web-server', () => {
-
+gulp.task('start-web-server', () =>
 	fs.readFile('./config.json', (err, data) => {
-
-		if (err) {
-			console.dir(err);
-			return;
-		}
-
+		if (err) return console.dir(err);
 		const config = JSON.parse(data);
-
-		require('./dist/server.js').default(config.webServer).start().then(() => {
-			console.log(`web server started on port ${config.webServer.port}`);
-		});
-	});
-
-});
+		require('./dist/server.js').default(config.webServer).start().then(() =>
+			console.log(`web server started on port ${config.webServer.port}`));
+	}));
 
 gulp.task('default', [
 	'process-server-app',
 	'process-web-app-html',
 	'process-web-app-js'
-], () => {
-
-	//gulp.watch(serverAppFiles, ['process-server-app']);
-	//gulp.watch(webAppHtmlFiles, ['process-web-app-html']);
-	//gulp.watch(webAppJsFiles, ['process-web-app-js']);
-
-});
+]);
