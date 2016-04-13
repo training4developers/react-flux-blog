@@ -13,37 +13,11 @@ export default function(options) {
 	app.use(express.static(options.folder));
 
 	return {
-		start: function() {
-
-			return new Promise((resolve, reject) => {
-				server.listen(options.port, (err) => {
-
-					if (err) {
-						reject(err);
-						return;
-					}
-
-					resolve();
-
-				});
-			});
-
-		},
-		stop: function() {
-
-			return new Promise((resolve, reject) => {
-				server.close((err) => {
-
-					if (err) {
-						reject(err);
-						return;
-					}
-
-					resolve();
-
-				});
-			});
-
-		}
+		start: () => new Promise((resolve, reject) =>
+			server.listen(options.port, err =>
+				err ? reject(err) : resolve())),
+		stop: () => new Promise((resolve, reject) =>
+			server.close(err =>
+				err ? reject(err) : resolve()))
 	};
 }
