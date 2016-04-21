@@ -1,0 +1,11 @@
+{
+	"webServer": {
+		"port": 3000,
+		"folder": "dist/www"
+	},
+	"mongoServer": {
+		"host": "localhost",
+		"port": 27017,
+		"dbName": "bootcamp"
+	}
+}
