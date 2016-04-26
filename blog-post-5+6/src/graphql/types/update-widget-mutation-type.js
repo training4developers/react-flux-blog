@@ -5,14 +5,10 @@ import { WidgetEdge } from '../connections/widget-connection';
 import { getViewer, getWidgets, updateWidget } from '../../database';
 
 export const updateWidgetMutationType = mutationWithClientMutationId({
-	// name of the mutation
 	name: 'UpdateWidget',
-	// input data for the mutation, include the widget data from getVariables
 	inputFields: {
 		widget: { type: updateWidgetInputType }
 	},
-	// output data for the mutation, should contain the parent (viewer), and the new widget
-	// will be consumed by operation configures in getConfigs
 	outputFields: {
 		viewer: {
 			type: viewerType,
@@ -32,11 +28,8 @@ export const updateWidgetMutationType = mutationWithClientMutationId({
 		}
 	},
 	mutateAndGetPayload: ({widget}) => {
-		// extract widget mongo _id from global id
-		widget.id = fromGlobalId(widget.id).id;
-		// extract numeric owner id from global id
-		widget.owner.id = parseInt(fromGlobalId(widget.owner.id).id);
-		// save widget with extracted ids
+		widget.id = parseInt(fromGlobalId(widget.id).id, 10);
+		widget.ownerId = parseInt(fromGlobalId(widget.ownerId).id, 10);
 		return updateWidget(widget);		
 	} 
 });

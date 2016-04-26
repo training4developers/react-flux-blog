@@ -1,13 +1,8 @@
 import { GraphQLInputObjectType, GraphQLInt, GraphQLString, GraphQLID } from 'graphql';
-import { updateUserInputType } from './user-input-type';
 import { colorType } from './color-type';
 import { sizeType } from './size-type';
 
 const fields = {
-	owner: {
-		type: updateUserInputType,
-		description: 'The widget\'s user'
-	},
 	name: {
 		type: GraphQLString,
 		description: 'The widget name'
@@ -27,6 +22,10 @@ const fields = {
 	quantity: {
 		type: GraphQLInt,
 		description: 'The widget quantity'
+	},
+	ownerId: {
+		type: GraphQLID,
+		description: 'The widget\'s user'
 	}
 };
 

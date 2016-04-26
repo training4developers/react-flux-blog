@@ -16,7 +16,8 @@ export default Relay.createContainer(WidgetToolComponent, {
 					edges {
 						node {
 							id
-							name
+							firstName
+							lastName
 						}
 					}
 				}
@@ -31,7 +32,8 @@ export default Relay.createContainer(WidgetToolComponent, {
 							quantity
 							owner {
 								id
-								name
+								firstName
+								lastName
 							}
 						}
 					}

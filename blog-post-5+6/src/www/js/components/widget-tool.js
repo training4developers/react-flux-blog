@@ -57,7 +57,7 @@ export default class WidgetTool extends BaseComponent {
 	render() {
 		return <div className='col-md-12'>
 			<WidgetTableComponent editWidgetId={this.state.editWidgetId}
-				widgets={this.props.viewer.widgets} userList={this._fromEdges(this.props.viewer.users)}
+				widgets={this.props.viewer.widgets} userList={this._fromEdges(this.props.viewer.users, u => u.firstName + ' ' + u.lastName)}
 				sizeList={this._fromEnumType(this.props.sizes)}  colorList={this._fromEnumType(this.props.colors)}
 				onSave={this._saveWidget} onDelete={this._deleteWidget}
 				onEdit={this._editWidget} onCancelEdit={this._cancelEditWidget} />

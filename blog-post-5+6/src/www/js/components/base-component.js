@@ -2,9 +2,9 @@ import React from 'react';
 
 export default class BaseComponent extends React.Component {
 
-	_fromEdges(collection, labelField = 'name') {
+	_fromEdges(collection, labelFn) {
 		return collection.edges.map(edge => ({
-			value: edge.node.id, label: edge.node[labelField]
+			value: edge.node.id, label: labelFn(edge.node)
 		}));
 	}
 	

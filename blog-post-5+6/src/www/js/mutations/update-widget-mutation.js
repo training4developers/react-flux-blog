@@ -22,10 +22,7 @@ export default class extends Relay.Mutation {
 				color: this.props.color,
 				size: this.props.size,
 				quantity: this.props.quantity,
-				owner: {
-					id: this.props.owner.id,
-					name: this.props.owner.name
-				}
+				ownerId: this.props.ownerId
 			}
 		};
 	}	
@@ -48,14 +45,6 @@ export default class extends Relay.Mutation {
 		return Relay.QL`
 			fragment on UpdateWidgetPayload @relay(pattern: true) {
 				viewer {
-					users {
-						edges {
-							node {
-								id
-								name
-							}
-						}
-					}					
 					widgets {
 						edges {
 							node {
@@ -67,7 +56,8 @@ export default class extends Relay.Mutation {
 								quantity
 								owner {
 									id
-									name
+									firstName
+									lastName
 								}
 							}
 						}

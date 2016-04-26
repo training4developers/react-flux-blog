@@ -5,14 +5,10 @@ import { WidgetEdge } from '../connections/widget-connection';
 import { getViewer, getWidgets, insertWidget } from '../../database';
 
 export const insertWidgetMutationType = mutationWithClientMutationId({
-	// name of the mutation
 	name: 'InsertWidget',
-	// input data for the mutation, include the widget data from getVariables
 	inputFields: {
 		widget: { type: insertWidgetInputType }
 	},
-	// output data for the mutation, should contain the parent (viewer), and the new widget
-	// will be consumed by operation configures in getConfigs
 	outputFields: {
 		viewer: {
 			type: viewerType,
@@ -32,9 +28,7 @@ export const insertWidgetMutationType = mutationWithClientMutationId({
 		}
 	},
 	mutateAndGetPayload: ({widget}) => {
-		// extract numeric owner id from global id
-		widget.owner.id = parseInt(fromGlobalId(widget.owner.id).id);
-		// save widget with extracted ids
+		widget.ownerId = parseInt(fromGlobalId(widget.ownerId).id, 10);
 		return insertWidget(widget);		
 	} 
 });

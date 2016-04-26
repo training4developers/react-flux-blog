@@ -40,14 +40,6 @@ export default class extends Relay.Mutation {
 		return Relay.QL`
 			fragment on DeleteWidgetPayload @relay(pattern: true) {
 				viewer {
-					users {
-						edges {
-							node {
-								id
-								name
-							}
-						}
-					}					
 					widgets {
 						edges {
 							node {
@@ -59,7 +51,8 @@ export default class extends Relay.Mutation {
 								quantity
 								owner {
 									id
-									name
+									firstName
+									lastName
 								}
 							}
 						}
