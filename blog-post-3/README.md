@@ -11,13 +11,13 @@ $ npm install
 3. Run gulp from the terminal, to create the application files.
 
 ```bash
-gulp
+$ gulp
 ```
 
 4. Open a new terminal, and run the following gulp command to start the web server.
 
 ```bash
-gulp server
+$ gulp server
 ```
 
 5. Open your web browser and point it to [http://localhost:8080](http://localhost:8080). The web application will load.

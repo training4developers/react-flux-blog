@@ -1,16 +1,18 @@
-# Blog Post 2 - Working with Data in React: Properties & State Instructions
+# Blog Post 3 - Exploring React's State Propagation Instructions
 
 1. Install [Node.js](https://nodejs.org) (version 4 or later) and clone this repository.
 2. Run the following commands from a terminal in the root folder of the cloned repository.
 
 ```bash
-$ npm install --global gulp
+$ npm install --global gulp webpack babel-cli
 $ npm install
 ```
 
 3. Run gulp from the terminal, to create the application files.
 
 ```bash
+$ gulp
+$ npm update-schema
 $ gulp
 ```
 
