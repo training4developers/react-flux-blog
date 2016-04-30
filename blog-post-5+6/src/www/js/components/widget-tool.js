@@ -20,9 +20,8 @@ export default class WidgetTool extends BaseComponent {
 	}
 
 	_appendWidget(widget) {
-		Relay.Store.commitUpdate(new InsertWidgetMutation(
-			Object.assign({	viewer: this.props.viewer, widget: null }, widget)
-		));
+		Relay.Store.commitUpdate(new InsertWidgetMutation(Object.assign({
+			viewer: this.props.viewer, widget: null }, widget)));
 	}
 
 	_updateWidget(widget) {

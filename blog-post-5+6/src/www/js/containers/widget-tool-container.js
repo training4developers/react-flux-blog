@@ -21,7 +21,7 @@ export default Relay.createContainer(WidgetToolComponent, {
 						}
 					}
 				}
-				widgets(first: 10) {
+				widgets(first: 1000) {
 					edges {
 						node {
 							id

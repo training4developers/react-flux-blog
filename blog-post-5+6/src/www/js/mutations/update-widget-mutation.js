@@ -34,7 +34,8 @@ export default class extends Relay.Mutation {
 			fieldIDs: {
 				// id of the top level fragment
 				// id of the viewer updated
-				viewer: this.props.viewer.id 
+				viewer: this.props.viewer.id, 
+				widgets: this.props.widget.id 
 			}
 		}];
 	}
