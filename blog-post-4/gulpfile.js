@@ -92,6 +92,9 @@ gulp.task('run-tests', (done) => {
 		.on('error', console.dir)
 		.pipe(gulp.dest('__tests__'))
 		.on('end', () => {
+
+			console.log(__dirname);
+
 			jest.runCLI({ '_': ['specs'], coverage: true }, __dirname, () => {
 				done();
 			});
